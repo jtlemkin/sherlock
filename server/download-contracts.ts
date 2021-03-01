@@ -7,19 +7,12 @@ import {
     existsSync, 
     mkdir, 
     copyFile
-} from "fs"
-import { promisify } from "util"
+} from "promise-fs"
 import { join, extname, normalize, basename } from "path"
-
-const promiseReadFile = promisify(readFile)
-const promiseReaddir = promisify(readdir)
-const promiseRmdir = promisify(rmdir)
-const promiseMkdir = promisify(mkdir)
-const promiseCopyFile = promisify(copyFile)
 
 async function getSlugs() {
     try {
-        const text = await promiseReadFile("./contracts.txt", "utf-8")
+        const text = await readFile("./contracts.txt", "utf-8")
         return text.split('\n').map(line => line.split(" ")[0])
     } catch(err) {
         throw err
@@ -29,7 +22,7 @@ async function getSlugs() {
 // Checks to see if path contains sol files, if not recursively check subdirectories 
 async function getSolFiles(path: string) {
     try {
-        const fnames = await promiseReaddir(path)
+        const fnames = await readdir(path)
         const promise = Promise.all(fnames.map(fname => {
             return new Promise<string[]>(async (resolve, reject) => {
                 try {
@@ -61,11 +54,11 @@ async function migrateSolFiles(slug: string, files: string[]) {
     const dir = join("contracts", formattedSlug)
 
     if (!existsSync(dir)) {
-        await promiseMkdir(dir, {recursive: true})
+        await mkdir(dir, {recursive: true})
     }
 
     try {
-        await Promise.all(files.map(fname => promiseCopyFile(fname, join(dir, basename(fname)))))
+        await Promise.all(files.map(fname => copyFile(fname, join(dir, basename(fname)))))
     } catch(err) {
         throw err
     }
@@ -98,7 +91,7 @@ async function downloadContracts() {
     try {
         const slugs = await getSlugs()
         await downloadSolFiles(slugs)
-        await promiseRmdir("temp", {recursive: true})
+        await rmdir("temp", {recursive: true})
     } catch(err) {
         throw err
     }
