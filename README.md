@@ -7,8 +7,7 @@ owner/project.
 3. Run 'npm run download-contracts' in order to download popular smart contracts
 listed in contracts.txt that the app will compare other contracts for forking
 detection.
-4. Run 'npm run start' to start
-the server listening on port 8000.
+4. Run 'npm run start' to start the server listening on port 8000.
 
 ## Usage
 The project currently only retrieves contract source code from etherscan. 
