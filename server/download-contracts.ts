@@ -19,8 +19,8 @@ const promiseCopyFile = promisify(copyFile)
 
 async function getSlugs() {
     try {
-        const text = await promiseReadFile("./contracts_test.txt", "utf-8")
-        return text.split('\n')
+        const text = await promiseReadFile("./contracts.txt", "utf-8")
+        return text.split('\n').map(line => line.split(" ")[0])
     } catch(err) {
         throw err
     }
@@ -77,7 +77,6 @@ function downloadSolFiles(slugs: string[]) {
     const processes = slugs.map(slug => {
         return new Promise<void>((resolve, reject) => {
             const path = normalize(`temp/${slug}`)
-            console.log("Path", path)
             const child = exec(`git clone https://github.com/${slug}.git ${path}`, (error, stdout, stderr) => {
                 if (stderr) {
                     console.log(stderr)

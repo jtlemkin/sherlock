@@ -1,10 +1,10 @@
-miguelmota/solidity-idiosyncrasies
-Uniswap/uniswap-v2-periphery
-0xcert/ethereum-erc721
-SmartContractSecurity/SWC-registry
-ProofSuite/OrFeed
-kleros/kleros
-DRI-network/RICO
-Turing-Chain/Smart-Contract-Modular-Template
-OpenZeppelin/openzeppelin-test-environment
-pbrudny/learning-solidity-2018
+miguelmota/solidity-idiosyncrasies 262
+Uniswap/uniswap-v2-periphery 241
+0xcert/ethereum-erc721 236
+SmartContractSecurity/SWC-registry 193
+ProofSuite/OrFeed 153
+kleros/kleros 121
+DRI-network/RICO 83
+Turing-Chain/Smart-Contract-Modular-Template 83
+OpenZeppelin/openzeppelin-test-environment 66
+pbrudny/learning-solidity-2018 62
