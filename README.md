@@ -2,8 +2,8 @@
 
 ## Installation
 1. In the server directory, run 'npm install' to get necessary dependencies. 
-2. If desired you can add contracts to contracts.txt in the form of <OWNER>/
-<PROJECT>. This contract will then be used by the app as a reference to determine
+2. If desired you can add contracts to contracts.txt in the form of owner/
+project. This contract will then be used by the app as a reference to determine
 if forking occured.
 3. Run 'npm run download-contracts' in order to download popular smart contracts
 that our app will compare other contracts to
