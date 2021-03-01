@@ -1,4 +1,4 @@
-import { readdir, readFile } from 'promise-fs'
+import { readdir, readFileSync } from 'promise-fs'
 import { normalize, join, basename } from 'path'
 import { Project } from './types'
 
@@ -25,9 +25,9 @@ export async function getProjectInterfaces() {
     }
 }
 
-export async function getContract(slug: string, contractName: string) {
+export function getContract(slug: string, contractName: string) {
     const path = join("contracts", slug.replace('/', '_'), contractName + ".sol")
-    return await readFile(path, "utf-8")
+    return readFileSync(path, "utf-8")
 }
 
 // This can probably be done better with regex
