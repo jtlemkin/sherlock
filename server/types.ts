@@ -1,9 +1,9 @@
 export interface Contract {
     name: string,
-    lines: string[]
+    content: string
 }
 
-export interface ProjectInterface {
+export interface Project {
     projectName: string,
     contractNames: string[]
 }

@@ -6,4 +6,4 @@ export function jaccardDistance(first: string[], second: string[]) {
     const intersection = new Set(first.filter(e => s2.has(e)))
 
     return intersection.size / union.size 
-}
+} 

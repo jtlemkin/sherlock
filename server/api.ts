@@ -14,7 +14,7 @@ export async function getContracts(contractID: string) {
         return Object.keys(fixedSourceCodeObject["sources"])
             .map(name => ({
                 name, 
-                lines: (fixedSourceCodeObject["sources"][name]["content"] as string).split('\n')
+                content: fixedSourceCodeObject["sources"][name]["content"]
             } as Contract))
     } catch(err) {
         throw err
