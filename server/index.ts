@@ -9,6 +9,7 @@ import { getBestMatchesForContracts } from './fork-detection'
 const app = express()
 const PORT = 8000
 
+// Start the server
 async function start() {
     const localProjects = await getProjectInterfaces()
 

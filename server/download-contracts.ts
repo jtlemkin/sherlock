@@ -10,6 +10,7 @@ import {
 } from "promise-fs"
 import { join, extname, normalize, basename } from "path"
 
+// Get slugs from contracts.txt file
 async function getSlugs() {
     try {
         const text = await readFile("./contracts.txt", "utf-8")
@@ -49,6 +50,7 @@ async function getSolFiles(path: string) {
     }
 }
 
+// Move contract files out of downloaded git repos into a contracts folder
 async function migrateSolFiles(slug: string, files: string[]) {
     const formattedSlug = slug.replace('/', '_')
     const dir = join("contracts", formattedSlug)
@@ -87,6 +89,7 @@ function downloadSolFiles(slugs: string[]) {
     return Promise.all(processes)
 }
 
+// Download popular smart contracts from github
 async function downloadContracts() {
     try {
         const slugs = await getSlugs()

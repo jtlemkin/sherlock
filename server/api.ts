@@ -4,6 +4,7 @@ import { Contract } from './types'
 const etherscanAPIKey = "P5J1B9HADZM199WWRBR1X31T72E98PDRCF"
 const etherscanBaseURL = "https://api.etherscan.io/api?module=contract&action=getsourcecode"
 
+// Downloads smart contract source from etherscan
 export async function getContracts(contractID: string) {
     try {
         const url = etherscanBaseURL + "&address=" + contractID + "&apikey=" + etherscanAPIKey

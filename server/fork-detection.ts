@@ -5,7 +5,7 @@ import {
     getContract
 } from './interface-parsing'
 
-// This is actually a modified jaccard distance as 
+// Computes similarity between two sets of strings
 function jaccardDistance(first: string[], second: string[]) {
     const s2 = new Set(second)
 
@@ -19,6 +19,10 @@ function jaccardDistance(first: string[], second: string[]) {
 // needs to be chosen
 const projectInterfaceSimilarityThreshold = 0.04
 
+// Compares uploaded contracts with local projects, first filtering out local
+// projects by how many contracts they have in common, and then examining the
+// signatures of the remaining contracts in order to determine if there are 
+// any matches. If so this function returns the best ones
 export function getBestMatchesForContracts(uploadedContracts: Contract[], localProjects: Project[]) {
     const uploadedProjectInterface = uploadedContracts
         .map(contract => contractNameFromPath(contract.name))
