@@ -17,7 +17,7 @@ function jaccardDistance(first: string[], second: string[]) {
 
 // This is being chosen arbitrarily for testing, a better value
 // needs to be chosen
-const projectInterfaceSimilarityThreshold = 0.04
+const projectInterfaceSimilarityThreshold = 0.01
 
 // Compares uploaded contracts with local projects, first filtering out local
 // projects by how many contracts they have in common, and then examining the
@@ -41,9 +41,15 @@ export function getBestMatchesForContracts(uploadedContracts: Contract[], localP
         localProjects.forEach((localProject, i) => {
             // If the project has no contracts in common, they most likely 
             // aren't forked from one another
-            if (projectSimilarities[i] > projectInterfaceSimilarityThreshold) {
+            // Additionally if the contract is only one file it does not
+            // have a project interface so we disregard the project interface
+            // distance
+            if (
+                projectSimilarities[i] > projectInterfaceSimilarityThreshold ||
+                uploadedContracts.length === 1
+            ) {
                 localProject.contractNames.forEach(async localContractName => {
-                    const file = getContract(localProject.projectName, localContractName)
+                    const file = getContract(localProject.projectName, localContractName + ".sol")
                     const localProjectInterface = getContractInterface(file)
 
                     const similarity = jaccardDistance(uploadedContractInterface, localProjectInterface)

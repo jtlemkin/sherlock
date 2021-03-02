@@ -26,7 +26,7 @@ export async function getProjectInterfaces() {
 }
 
 export function getContract(slug: string, contractName: string) {
-    const path = join("contracts", slug.replace('/', '_'), contractName + ".sol")
+    const path = join("contracts", slug.replace('/', '_'), contractName)
     return readFileSync(path, "utf-8")
 }
 

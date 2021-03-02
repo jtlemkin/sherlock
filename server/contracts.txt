@@ -8,3 +8,4 @@ DRI-network/RICO 83
 Turing-Chain/Smart-Contract-Modular-Template 83
 OpenZeppelin/openzeppelin-test-environment 66
 pbrudny/learning-solidity-2018 62
+thewaifuproject/contracts 1

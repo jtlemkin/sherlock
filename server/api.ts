@@ -6,18 +6,25 @@ const etherscanBaseURL = "https://api.etherscan.io/api?module=contract&action=ge
 
 // Downloads smart contract source from etherscan
 export async function getContracts(contractID: string) {
-    try {
-        const url = etherscanBaseURL + "&address=" + contractID + "&apikey=" + etherscanAPIKey
-        console.log("URL", url)
-        const response = await axios.get(url)
-        const brokenSourceCodeJSONString = response.data["result"][0]["SourceCode"]
-        const fixedSourceCodeObject = JSON.parse(brokenSourceCodeJSONString.slice(1, brokenSourceCodeJSONString.length - 1))
-        return Object.keys(fixedSourceCodeObject["sources"])
+    const url = etherscanBaseURL + "&address=" + contractID + "&apikey=" + etherscanAPIKey
+    console.log("URL", url)
+
+    const response = await axios.get(url)
+    const sourceCode = response.data["result"][0]["SourceCode"]
+    if (sourceCode[0] == "{") {
+        // "Malformed object"
+        const fixedSourceCodeResponse = JSON.parse(sourceCode.slice(1, sourceCode.length - 1))
+        return Object.keys(fixedSourceCodeResponse["sources"])
             .map(name => ({
                 name, 
-                content: fixedSourceCodeObject["sources"][name]["content"]
+                content: fixedSourceCodeResponse["sources"][name]["content"]
             } as Contract))
-    } catch(err) {
-        throw err
+    } else {
+        console.log(sourceCode)
+        // Source code string
+        return [{
+            name: "Contract",
+            content: sourceCode
+        }]
     }
 }
