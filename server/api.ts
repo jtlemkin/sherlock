@@ -7,7 +7,6 @@ const etherscanBaseURL = "https://api.etherscan.io/api?module=contract&action=ge
 // Downloads smart contract source from etherscan
 export async function getContracts(contractID: string) {
     const url = etherscanBaseURL + "&address=" + contractID + "&apikey=" + etherscanAPIKey
-    console.log("URL", url)
 
     const response = await axios.get(url)
     const sourceCode = response.data["result"][0]["SourceCode"]
@@ -20,7 +19,6 @@ export async function getContracts(contractID: string) {
                 content: fixedSourceCodeResponse["sources"][name]["content"]
             } as Contract))
     } else {
-        console.log(sourceCode)
         // Source code string
         return [{
             name: "Contract",
